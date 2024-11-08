@@ -11,7 +11,7 @@ resource "google_compute_instance" "gce_vm" {
     source      = google_compute_disk.boot_gce_disk.id
   }
   metadata = merge({
-    block-project-ssh-keys = "true"
+    block-project-ssh-keys = "false"
     },
     var.metadata
   )
