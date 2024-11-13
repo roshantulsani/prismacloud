@@ -12,9 +12,22 @@ resource "google_compute_instance" "gce_vm" {
   }
   metadata = merge({
     block-project-ssh-keys = "false"
-    },
-    var.metadata
-  )
+    custom_metadata = jsonencode({
+      owner   = "owner@globe.com.ph",
+      path    = "Fullpath",
+      members = [
+        {
+          user_id = "123456",
+          name    = "user1 globe"
+        },
+        {
+          user_id = "5678910",
+          name    = "user2 globe"
+        }
+      ]
+    })
+  }, var.metadata)
+
   network_interface {
     network    = var.network
     subnetwork = var.subnetwork
